@@ -1,0 +1,221 @@
+[gd_scene load_steps=28 format=3 uid="uid://hdjpwlxegh3r"]
+
+[ext_resource type="Script" path="res://generic/main.gd" id="1_q4sf3"]
+[ext_resource type="PackedScene" uid="uid://ctj0ackd1xgxb" path="res://generic/audio.tscn" id="2_67yvv"]
+[ext_resource type="TileSet" uid="uid://bs08xj3bvm48q" path="res://scene/main_floor.tres" id="2_fxths"]
+[ext_resource type="PackedScene" uid="uid://cmycphda0o3or" path="res://characters/player/player.tscn" id="3_tt1v5"]
+[ext_resource type="Script" path="res://scene/light_follow_player.gd" id="4_1h3ng"]
+[ext_resource type="Script" path="res://scene/dance_floor.gd" id="4_o3qk0"]
+[ext_resource type="Resource" uid="uid://cxu8bru1pfmik" path="res://generic/stages/stage1.tres" id="4_pms41"]
+[ext_resource type="PackedScene" uid="uid://dxa3121yw3uhv" path="res://scene/random_light.tscn" id="5_7631r"]
+[ext_resource type="Resource" uid="uid://dqcq4xlvgkbq3" path="res://generic/stages/stage2.tres" id="5_u7h12"]
+[ext_resource type="Resource" uid="uid://tcw7xhh7e5ot" path="res://generic/stages/stage3.tres" id="6_n5c3r"]
+[ext_resource type="Resource" uid="uid://bxsgjco7f0174" path="res://generic/stages/stage4.tres" id="7_jdbdd"]
+[ext_resource type="Script" path="res://generic/time_label.gd" id="8_2pv05"]
+[ext_resource type="Script" path="res://generic/Game_over.gd" id="9_c0yxe"]
+[ext_resource type="Script" path="res://scene/game_timer.gd" id="12_6ugp0"]
+[ext_resource type="PackedScene" uid="uid://baqexx18ek3lx" path="res://generic/mute_button.tscn" id="12_my7vh"]
+[ext_resource type="Texture2D" uid="uid://bcja7t5wk3xrk" path="res://scene/progress/progressgray.png" id="13_agm3o"]
+[ext_resource type="PackedScene" uid="uid://cekrtsqpbclj" path="res://menu/menu_select_button.tscn" id="13_jww22"]
+[ext_resource type="Script" path="res://menu/retry_button.gd" id="14_8djcs"]
+[ext_resource type="Texture2D" uid="uid://67hc7la4b13w" path="res://scene/progress/progressred.png" id="19_ogv6r"]
+[ext_resource type="Texture2D" uid="uid://cei3va2wdncc8" path="res://scene/progress/progressgreen.png" id="20_f8rg4"]
+[ext_resource type="PackedScene" uid="uid://fxy0x2jirvwy" path="res://pause/pause_scene.tscn" id="21_8w05x"]
+[ext_resource type="Script" path="res://menu/continue_button.gd" id="22_iwvc1"]
+[ext_resource type="Script" path="res://menu/svart_over_button.gd" id="23_vr4ug"]
+[ext_resource type="Script" path="res://menu/return_button.gd" id="24_ccqjl"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_jchb4"]
+size = Vector2(1254, 53)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_m3sdv"]
+size = Vector2(83, 783)
+
+[sub_resource type="LabelSettings" id="LabelSettings_1lkme"]
+font_size = 50
+
+[node name="Main" type="Node2D" node_paths=PackedStringArray("spawner_node", "audio", "pause_menu")]
+script = ExtResource("1_q4sf3")
+person_scene_path = "res://characters/person.tscn"
+spawner_node = NodePath("People")
+person_limit = 25
+growth_duration = 1.0
+audio = NodePath("AudioStreamPlayer")
+pause_menu = NodePath("PauseScene")
+
+[node name="AudioStreamPlayer" parent="." instance=ExtResource("2_67yvv")]
+autoplay = false
+mix_target = 1
+
+[node name="Node2D" type="Node2D" parent="."]
+
+[node name="Wall" type="StaticBody2D" parent="Node2D"]
+position = Vector2(-2, -376)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Node2D/Wall"]
+shape = SubResource("RectangleShape2D_jchb4")
+
+[node name="Wall2" type="StaticBody2D" parent="Node2D"]
+position = Vector2(4, 356)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Node2D/Wall2"]
+shape = SubResource("RectangleShape2D_jchb4")
+
+[node name="Wall3" type="StaticBody2D" parent="Node2D"]
+position = Vector2(-623, 1)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Node2D/Wall3"]
+position = Vector2(-3.5, -4.5)
+shape = SubResource("RectangleShape2D_m3sdv")
+
+[node name="Wall4" type="StaticBody2D" parent="Node2D"]
+position = Vector2(620, 1)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Node2D/Wall4"]
+position = Vector2(-3.5, -4.5)
+shape = SubResource("RectangleShape2D_m3sdv")
+
+[node name="TileMap" type="TileMap" parent="."]
+scale = Vector2(0.2, 0.2)
+tile_set = ExtResource("2_fxths")
+format = 2
+layer_0/tile_data = PackedInt32Array(65533, 2, 0, 131069, 2, 0, 131070, 65538, 0, 131071, 2, 0, 65536, 2, 0, 65537, 2, 0, 65538, 2, 0, 2, 65538, 0, 1, 2, 0, 0, 65538, 0, 65535, 2, 0, 65534, 65538, 0, -3, 65538, 0, -2, 2, 0, -1, 65538, 0, -65537, 65538, 0, -131072, 2, 0, -131071, 65538, 0, -65535, 65538, 0, -65534, 2, 0, -65533, 65538, 0, -65536, 65538, 0, -4, 2, 0, -65538, 65538, 0, -65539, 65538, 0, -5, 2, 0, -6, 65538, 0, -65542, 2, 0, -131078, 2, 0, -131077, 65538, 0, -131076, 65538, 0, -65540, 2, 0, -65541, 65538, 0, -7, 65538, 0, -65543, 65538, 0, -196612, 2, 0, -196611, 65538, 0, -196610, 2, 0, -196609, 2, 0, -262144, 65538, 0, -196608, 2, 0, -196607, 65538, 0, -196606, 65538, 0, -196605, 65538, 0, -196604, 65538, 0, -196603, 2, 0, -196602, 65538, 0, -262138, 65538, 0, -262139, 65538, 0, -262140, 65538, 0, -262141, 65538, 0, -262142, 65538, 0, -262143, 65538, 0, -196613, 2, 0, -196614, 2, 0, -196615, 65538, 0, -196616, 2, 0, -131080, 2, 0, -131079, 65538, 0, 65529, 65538, 0, 65528, 65538, 0, 131064, 65538, 0, 196600, 65538, 0, 262136, 65538, 0, 327672, 65538, 0, -8, 65538, 0, -65544, 2, 0, 327673, 65538, 0, 327674, 2, 0, 327675, 65538, 0, 327676, 2, 0, 327677, 65538, 0, 327678, 2, 0, 262143, 2, 0, 196608, 65538, 0, 196609, 2, 0, 196610, 2, 0, 262146, 2, 0, 262147, 65538, 0, 262148, 65538, 0, 262149, 2, 0, 262150, 65538, 0, 262151, 2, 0, 196615, 65538, 0, 131079, 2, 0, 65543, 65538, 0, 7, 65538, 0, -65529, 65538, 0, -131065, 2, 0, -196601, 2, 0, -262137, 65538, 0, -327673, 65538, 0, -327674, 2, 0, -327675, 65538, 0, -327676, 2, 0, -327677, 2, 0, -327678, 65538, 0, -327679, 2, 0, -327680, 65538, 0, -262145, 2, 0, -262146, 65538, 0, -262147, 65538, 0, -262148, 65538, 0, -262149, 2, 0, -262150, 65538, 0, -262151, 65538, 0, -262152, 2, 0, 262137, 2, 0, 262138, 2, 0, 262139, 65538, 0, 262140, 65538, 0, 262141, 2, 0, 262142, 65538, 0, 196607, 65538, 0, 196606, 2, 0, 196605, 2, 0, 196604, 2, 0, 196603, 2, 0, 196602, 2, 0, 196601, 2, 0, 131067, 2, 0, 131066, 65538, 0, 131065, 65538, 0, 65531, 65538, 0, 65532, 2, 0, 65530, 65538, 0, 131068, 2, 0, -131075, 65538, 0, -131074, 2, 0, -131073, 2, 0, -131070, 65538, 0, -131069, 65538, 0, -131068, 65538, 0, -131067, 65538, 0, -131066, 2, 0, -65530, 65538, 0, 6, 65538, 0, 65542, 65538, 0, 131078, 65538, 0, 196614, 65538, 0, 196613, 2, 0, 131077, 2, 0, 65541, 65538, 0, 5, 65538, 0, -65531, 2, 0, -65532, 65538, 0, 3, 2, 0, 65539, 2, 0, 131075, 65538, 0, 196612, 2, 0, 131076, 65538, 0, 65540, 2, 0, 4, 2, 0, 196611, 2, 0, 131074, 65538, 0, 131073, 2, 0, 131072, 65538, 0, 262144, 2, 0, 262145, 2, 0, 327679, 65538, 0)
+
+[node name="Camera2D" type="Camera2D" parent="."]
+
+[node name="Light" type="Node2D" parent="."]
+
+[node name="CanvasModulate" type="CanvasModulate" parent="Light"]
+color = Color(0.32549, 0.529412, 0.470588, 1)
+script = ExtResource("4_o3qk0")
+
+[node name="Follow_light" parent="Light" node_paths=PackedStringArray("player") instance=ExtResource("5_7631r")]
+position = Vector2(-347, 172)
+script = ExtResource("4_1h3ng")
+player = NodePath("../../Player")
+speed = 70.0
+
+[node name="Random_light" parent="Light" instance=ExtResource("5_7631r")]
+position = Vector2(408.25, 185.75)
+color = Color(0.575413, 0.820741, 0.616526, 1)
+speed = 60.0
+
+[node name="Random_light2" parent="Light" instance=ExtResource("5_7631r")]
+position = Vector2(-145, -208)
+color = Color(0.525214, 0.793863, 0.909885, 1)
+
+[node name="Player" parent="." instance=ExtResource("3_tt1v5")]
+position = Vector2(0, 2)
+move_speed = 200.0
+stages = Array[Resource("res://generic/stages/stage.gd")]([ExtResource("4_pms41"), ExtResource("5_u7h12"), ExtResource("6_n5c3r"), ExtResource("7_jdbdd")])
+
+[node name="People" type="Node2D" parent="."]
+
+[node name="UI" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_left = -577.0
+offset_top = -325.0
+offset_right = 578.0
+offset_bottom = 317.0
+
+[node name="Mute_button" parent="UI" node_paths=PackedStringArray("audio") instance=ExtResource("12_my7vh")]
+layout_mode = 0
+offset_left = 1015.0
+offset_top = 531.0
+offset_right = 1115.0
+offset_bottom = 631.0
+audio = NodePath("../../AudioStreamPlayer")
+
+[node name="Timer_progress" type="TextureProgressBar" parent="UI" node_paths=PackedStringArray("game_timer", "time_until_gray")]
+layout_mode = 0
+offset_left = 46.0
+offset_top = 28.0
+offset_right = 1115.0
+offset_bottom = 37.0
+max_value = 60.0
+value = 60.0
+nine_patch_stretch = true
+texture_progress = ExtResource("13_agm3o")
+script = ExtResource("8_2pv05")
+game_timer = NodePath("../../Timers/Game")
+time_until_gray = NodePath("Timer")
+gray_bar = ExtResource("13_agm3o")
+
+[node name="Timer" type="Timer" parent="UI/Timer_progress"]
+
+[node name="Game_over" type="Label" parent="UI"]
+visible = false
+layout_mode = 0
+offset_left = 443.0
+offset_top = 289.0
+offset_right = 721.0
+offset_bottom = 358.0
+text = "Game over!"
+label_settings = SubResource("LabelSettings_1lkme")
+script = ExtResource("9_c0yxe")
+
+[node name="Button" parent="UI" node_paths=PackedStringArray("audio") instance=ExtResource("13_jww22")]
+layout_mode = 1
+offset_left = 467.0
+offset_top = 517.0
+offset_right = 467.36
+offset_bottom = 498.23
+script = ExtResource("14_8djcs")
+audio = NodePath("../../AudioStreamPlayer")
+button_text = "Try again?"
+
+[node name="Label" parent="UI/Button/NinePatchRect/Button" index="0"]
+text = "Try again?"
+
+[node name="Timers" type="Node" parent="."]
+
+[node name="Spawn_timer" type="Timer" parent="Timers"]
+autostart = true
+
+[node name="Game" type="Timer" parent="Timers" node_paths=PackedStringArray("timer_bar")]
+wait_time = 40.0
+one_shot = true
+autostart = true
+script = ExtResource("12_6ugp0")
+reduced_time = 10.0
+red_bar = ExtResource("19_ogv6r")
+green_bar = ExtResource("20_f8rg4")
+gray_bar = ExtResource("13_agm3o")
+timer_bar = NodePath("../../UI/Timer_progress")
+
+[node name="PauseScene" parent="." instance=ExtResource("21_8w05x")]
+process_mode = 3
+offset_left = -582.0
+offset_top = 460.0
+offset_right = -582.0
+offset_bottom = 460.0
+
+[node name="Continue" parent="PauseScene/VBoxContainer" index="0" node_paths=PackedStringArray("pause_node")]
+script = ExtResource("22_iwvc1")
+pause_node = NodePath("../..")
+
+[node name="Start_over" parent="PauseScene/VBoxContainer" index="1" node_paths=PackedStringArray("audio")]
+script = ExtResource("23_vr4ug")
+scene_path = "res://scene/main_scene.tscn"
+audio = NodePath("../../../AudioStreamPlayer")
+
+[node name="Return_to_menu" parent="PauseScene/VBoxContainer" index="2" node_paths=PackedStringArray("audio")]
+script = ExtResource("24_ccqjl")
+scene_path = "res://menu/main_menu.tscn"
+audio = NodePath("../../../AudioStreamPlayer")
+
+[connection signal="finished" from="AudioStreamPlayer" to="." method="_on_audio_finished"]
+[connection signal="timeout" from="UI/Timer_progress/Timer" to="UI/Timer_progress" method="_on_timer_timeout"]
+[connection signal="pressed" from="UI/Button/NinePatchRect/Button" to="UI/Button" method="_on_button_pressed"]
+[connection signal="timeout" from="Timers/Spawn_timer" to="." method="_on_spawn_timer_timeout"]
+[connection signal="timeout" from="Timers/Game" to="UI/Game_over" method="_on_game_timeout"]
+[connection signal="pressed" from="PauseScene/VBoxContainer/Continue/NinePatchRect/Button" to="PauseScene/VBoxContainer/Continue" method="_on_button_pressed"]
+[connection signal="pressed" from="PauseScene/VBoxContainer/Start_over/NinePatchRect/Button" to="PauseScene/VBoxContainer/Start_over" method="_on_button_pressed"]
+[connection signal="pressed" from="PauseScene/VBoxContainer/Return_to_menu/NinePatchRect/Button" to="PauseScene/VBoxContainer/Return_to_menu" method="_on_button_pressed"]
+
+[editable path="UI/Button"]
+[editable path="PauseScene"]
+[editable path="PauseScene/VBoxContainer/Continue"]
+[editable path="PauseScene/VBoxContainer/Start_over"]
+[editable path="PauseScene/VBoxContainer/Return_to_menu"]

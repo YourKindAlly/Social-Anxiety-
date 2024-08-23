@@ -1,0 +1,30 @@
+[gd_scene load_steps=5 format=3 uid="uid://dxa3121yw3uhv"]
+
+[ext_resource type="Texture2D" uid="uid://ckav8j2sry0p" path="res://scene/light.png" id="1_5jfg7"]
+[ext_resource type="Script" path="res://scene/random_light.gd" id="2_4j6pu"]
+[ext_resource type="Script" path="res://scene/light_area.gd" id="3_w3kip"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_f4fx7"]
+radius = 43.9577
+
+[node name="Random_light" type="PointLight2D"]
+scale = Vector2(1.845, 1.815)
+color = Color(0.952941, 0.65098, 0.733333, 1)
+energy = 0.5
+shadow_enabled = true
+shadow_color = Color(0.458824, 0.188235, 0.564706, 1)
+shadow_filter = 2
+texture = ExtResource("1_5jfg7")
+height = 1.0
+script = ExtResource("2_4j6pu")
+speed = 45.0
+within_bounds = Vector2(500, 300)
+
+[node name="Area2D" type="Area2D" parent="."]
+script = ExtResource("3_w3kip")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("CircleShape2D_f4fx7")
+
+[connection signal="body_entered" from="Area2D" to="Area2D" method="_on_body_entered"]
+[connection signal="body_exited" from="Area2D" to="Area2D" method="_on_body_exited"]

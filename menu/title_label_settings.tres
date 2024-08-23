@@ -1,0 +1,7 @@
+[gd_resource type="LabelSettings" load_steps=2 format=3 uid="uid://833sjfxqaxl5"]
+
+[ext_resource type="FontFile" uid="uid://dj3mqfgjtsu36" path="res://generic/Raven Song.otf" id="1_bpsfc"]
+
+[resource]
+font = ExtResource("1_bpsfc")
+font_size = 50

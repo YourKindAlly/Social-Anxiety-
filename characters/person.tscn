@@ -1,0 +1,64 @@
+[gd_scene load_steps=8 format=3 uid="uid://d3mb2gw1mu8rw"]
+
+[ext_resource type="Script" path="res://characters/person.gd" id="1_0m823"]
+[ext_resource type="Resource" uid="uid://cxu8bru1pfmik" path="res://generic/stages/stage1.tres" id="2_6opex"]
+[ext_resource type="Resource" uid="uid://dqcq4xlvgkbq3" path="res://generic/stages/stage2.tres" id="3_2qmhv"]
+[ext_resource type="Resource" uid="uid://tcw7xhh7e5ot" path="res://generic/stages/stage3.tres" id="4_hujbe"]
+[ext_resource type="SpriteFrames" uid="uid://don003v35pxw3" path="res://characters/circular_character_animation.tres" id="5_kwhuv"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_uw1fd"]
+radius = 10.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_3qoi5"]
+radius = 40.0
+
+[node name="Person" type="CharacterBody2D" node_paths=PackedStringArray("idle", "despawn", "animation", "quote_label", "quote_timer")]
+scale = Vector2(0.1, 0.1)
+script = ExtResource("1_0m823")
+idle = NodePath("Idle")
+despawn = NodePath("Despawn")
+within_bounds = Vector2(500, 300)
+movement_speed = 100.0
+animation = NodePath("Sprite2D")
+spawn_range = Vector2(500, 300)
+stages = Array[Resource("res://generic/stages/stage.gd")]([ExtResource("2_6opex"), ExtResource("3_2qmhv"), ExtResource("4_hujbe")])
+quotes = Array[String](["Watch yourself!", "You stepped on me!", "You look nervous?", "Are you ok?"])
+quote_label = NodePath("Lines")
+quote_timer = NodePath("Lines/Timer")
+
+[node name="Sprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(1.43051e-06, -4.76837e-07)
+scale = Vector2(0.4, 0.4)
+sprite_frames = ExtResource("5_kwhuv")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_uw1fd")
+debug_color = Color(0, 0.6, 0.701961, 0.105882)
+
+[node name="Idle" type="Timer" parent="."]
+wait_time = 3.0
+one_shot = true
+autostart = true
+
+[node name="Despawn" type="Timer" parent="."]
+wait_time = 0.5
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("CircleShape2D_3qoi5")
+
+[node name="Lines" type="Label" parent="."]
+offset_left = -60.0
+offset_top = -70.0
+offset_right = 60.0
+offset_bottom = -47.0
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Timer" type="Timer" parent="Lines"]
+
+[connection signal="timeout" from="Idle" to="." method="_on_idle_timeout"]
+[connection signal="timeout" from="Despawn" to="." method="_on_despawn_timeout"]
+[connection signal="body_entered" from="Area2D" to="." method="_on_collider_entered"]
+[connection signal="timeout" from="Lines/Timer" to="." method="_on_timer_timeout"]

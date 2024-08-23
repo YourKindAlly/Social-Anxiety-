@@ -1,0 +1,260 @@
+[gd_scene load_steps=18 format=3 uid="uid://bapwgx48af064"]
+
+[ext_resource type="Texture2D" uid="uid://bq80jss0j5qxu" path="res://scene/Disco-floor.png" id="1_voo6y"]
+[ext_resource type="Script" path="res://menu/menu_image.gd" id="2_i7h1l"]
+[ext_resource type="LabelSettings" uid="uid://833sjfxqaxl5" path="res://menu/title_label_settings.tres" id="3_02o1a"]
+[ext_resource type="Script" path="res://menu/windows_spanning.gd" id="3_ig4rl"]
+[ext_resource type="Script" path="res://menu/menu_title.gd" id="4_g6kik"]
+[ext_resource type="Script" path="res://menu/button_container.gd" id="5_let27"]
+[ext_resource type="Texture2D" uid="uid://cg62xpdxddtv5" path="res://menu/Keys/w-key.png" id="6_1bwcf"]
+[ext_resource type="PackedScene" uid="uid://cekrtsqpbclj" path="res://menu/menu_select_button.tscn" id="6_ic6gq"]
+[ext_resource type="Script" path="res://menu/play_button.gd" id="7_a2cgy"]
+[ext_resource type="Texture2D" uid="uid://bgq03u6mypj0k" path="res://menu/Keys/s-key.png" id="7_m3hie"]
+[ext_resource type="Script" path="res://menu/quit_button.gd" id="8_13u6i"]
+[ext_resource type="Texture2D" uid="uid://c8v02tqihblbo" path="res://menu/Keys/d-key.png" id="8_c5jla"]
+[ext_resource type="PackedScene" uid="uid://ctj0ackd1xgxb" path="res://generic/audio.tscn" id="8_tcy77"]
+[ext_resource type="Texture2D" uid="uid://cw8ua4841ckij" path="res://menu/Keys/a-key.png" id="9_lrg4o"]
+[ext_resource type="PackedScene" uid="uid://baqexx18ek3lx" path="res://generic/mute_button.tscn" id="10_updij"]
+[ext_resource type="Texture2D" uid="uid://y52gkpwfayog" path="res://menu/Keys/z-key.png" id="10_wltuw"]
+[ext_resource type="Script" path="res://generic/audio.gd" id="16_i5mhl"]
+
+[node name="MainMenu" type="Control"]
+layout_mode = 3
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -576.0
+offset_top = -324.0
+offset_right = 576.0
+offset_bottom = 324.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="TextureRect" type="TextureRect" parent="."]
+modulate = Color(0.356926, 0.511735, 1, 1)
+layout_mode = 0
+offset_left = -11.0
+offset_top = -96.0
+offset_right = 2669.0
+offset_bottom = 746.0
+texture = ExtResource("1_voo6y")
+stretch_mode = 1
+script = ExtResource("2_i7h1l")
+
+[node name="Windows" type="Control" parent="."]
+anchors_preset = 0
+offset_right = 1152.0
+offset_bottom = 648.0
+script = ExtResource("3_ig4rl")
+
+[node name="Tutorial_window" type="Control" parent="Windows"]
+anchors_preset = 0
+offset_left = -1152.0
+offset_bottom = 648.0
+
+[node name="Tutorial" type="Label" parent="Windows/Tutorial_window"]
+layout_mode = 0
+offset_right = 1152.0
+offset_bottom = 131.0
+text = "How I will beat social anxiety"
+label_settings = ExtResource("3_02o1a")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Label" type="RichTextLabel" parent="Windows/Tutorial_window"]
+layout_mode = 0
+offset_left = 157.0
+offset_top = 239.0
+offset_right = 982.0
+offset_bottom = 624.0
+bbcode_enabled = true
+text = "[font_size={25}]1. Go to a club
+2. Try to socialize
+3. Become more confident
+4. Stick to [b]similar[/b] people
+5. Avoid the lights
+6. ???[/font_size]"
+
+[node name="Button" parent="Windows/Tutorial_window" instance=ExtResource("6_ic6gq")]
+layout_mode = 1
+offset_left = 811.0
+offset_top = 498.0
+offset_right = 811.36
+offset_bottom = 478.12
+button_text = "Back >"
+
+[node name="TextureRect" type="TextureRect" parent="Windows/Tutorial_window"]
+layout_mode = 0
+offset_left = 811.0
+offset_top = 166.0
+offset_right = 911.0
+offset_bottom = 266.0
+texture = ExtResource("6_1bwcf")
+
+[node name="TextureRect2" type="TextureRect" parent="Windows/Tutorial_window"]
+layout_mode = 0
+offset_left = 811.0
+offset_top = 266.0
+offset_right = 911.0
+offset_bottom = 366.0
+texture = ExtResource("7_m3hie")
+
+[node name="TextureRect3" type="TextureRect" parent="Windows/Tutorial_window"]
+layout_mode = 0
+offset_left = 911.0
+offset_top = 266.0
+offset_right = 1011.0
+offset_bottom = 366.0
+texture = ExtResource("8_c5jla")
+
+[node name="TextureRect4" type="TextureRect" parent="Windows/Tutorial_window"]
+layout_mode = 0
+offset_left = 715.0
+offset_top = 266.0
+offset_right = 815.0
+offset_bottom = 366.0
+texture = ExtResource("9_lrg4o")
+
+[node name="TextureRect5" type="TextureRect" parent="Windows/Tutorial_window"]
+layout_mode = 0
+offset_left = 569.0
+offset_top = 266.0
+offset_right = 669.0
+offset_bottom = 366.0
+texture = ExtResource("10_wltuw")
+
+[node name="Label" type="Label" parent="Windows/Tutorial_window/TextureRect5"]
+layout_mode = 0
+offset_left = 30.0
+offset_top = 116.0
+offset_right = 77.0
+offset_bottom = 165.0
+text = "    ^
+Pause"
+
+[node name="Menu_window" type="Control" parent="Windows"]
+anchors_preset = 0
+offset_right = 1152.0
+offset_bottom = 678.0
+
+[node name="Title" type="Label" parent="Windows/Menu_window"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = -0.617
+anchor_top = 5.25
+anchor_right = -0.617
+anchor_bottom = 5.25
+offset_left = 710.784
+offset_top = -2759.5
+offset_right = 1862.78
+offset_bottom = -2658.5
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(575, 50)
+text = "Social! Anxiety!"
+label_settings = ExtResource("3_02o1a")
+horizontal_alignment = 1
+vertical_alignment = 1
+script = ExtResource("4_g6kik")
+
+[node name="Button_container" type="VBoxContainer" parent="Windows/Menu_window"]
+layout_mode = 0
+offset_left = 477.0
+offset_top = 166.0
+offset_right = 702.0
+offset_bottom = 678.0
+alignment = 1
+script = ExtResource("5_let27")
+
+[node name="Play_button" parent="Windows/Menu_window/Button_container" node_paths=PackedStringArray("audio") instance=ExtResource("6_ic6gq")]
+layout_mode = 2
+script = ExtResource("7_a2cgy")
+game_path = "res://scene/main_scene.tscn"
+audio = NodePath("../../../../AudioStreamPlayer")
+button_text = "Play"
+
+[node name="Tutorial_button" parent="Windows/Menu_window/Button_container" instance=ExtResource("6_ic6gq")]
+layout_mode = 2
+button_text = "Tutorial"
+
+[node name="Credits_button" parent="Windows/Menu_window/Button_container" instance=ExtResource("6_ic6gq")]
+layout_mode = 2
+button_text = "Credits"
+
+[node name="Quit_button" parent="Windows/Menu_window/Button_container" instance=ExtResource("6_ic6gq")]
+layout_mode = 2
+script = ExtResource("8_13u6i")
+button_text = "Quit"
+
+[node name="Mute_button" parent="Windows/Menu_window" node_paths=PackedStringArray("audio") instance=ExtResource("10_updij")]
+layout_mode = 0
+offset_left = 985.0
+offset_top = 524.0
+offset_right = 1085.0
+offset_bottom = 624.0
+audio = NodePath("../../../AudioStreamPlayer")
+
+[node name="Credits_window" type="Control" parent="Windows"]
+anchors_preset = 0
+offset_left = 1152.0
+offset_right = 2304.0
+offset_bottom = 648.0
+
+[node name="Credits" type="Label" parent="Windows/Credits_window"]
+layout_mode = 0
+offset_right = 1152.0
+offset_bottom = 131.0
+text = "Credits"
+label_settings = ExtResource("3_02o1a")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Label" type="RichTextLabel" parent="Windows/Credits_window"]
+layout_mode = 0
+offset_left = 121.0
+offset_top = 166.0
+offset_right = 1023.0
+offset_bottom = 621.0
+bbcode_enabled = true
+text = "[font_size={25}][b]MimStar![/b] Thank goodness you encouraged me make this game!
+
+My lovely family and friends for encouraging and playtesting
+
+Font by [b]Sinister Fonts[/b] from Fontesk.com
+
+Music by [b]tusic99[/b] from FreeSound.org
+
+Game created by [b]Kindally[/b][/font_size]"
+
+[node name="Button" parent="Windows/Credits_window" instance=ExtResource("6_ic6gq")]
+layout_mode = 1
+offset_left = 121.0
+offset_top = 498.0
+offset_right = 121.36
+offset_bottom = 478.12
+button_text = "< Back"
+
+[node name="AudioStreamPlayer" parent="." instance=ExtResource("8_tcy77")]
+script = ExtResource("16_i5mhl")
+
+[node name="View_buttons" type="Timer" parent="."]
+wait_time = 3.5
+autostart = true
+
+[connection signal="pressed" from="Windows/Tutorial_window/Button/NinePatchRect/Button" to="Windows" method="_on_tutorial_back_button_pressed"]
+[connection signal="pressed" from="Windows/Menu_window/Button_container/Play_button/NinePatchRect/Button" to="Windows/Menu_window/Button_container/Play_button" method="_on_button_pressed"]
+[connection signal="pressed" from="Windows/Menu_window/Button_container/Tutorial_button/NinePatchRect/Button" to="Windows" method="_on_tutorial_button_pressed"]
+[connection signal="pressed" from="Windows/Menu_window/Button_container/Credits_button/NinePatchRect/Button" to="Windows" method="_on_credits_button_pressed"]
+[connection signal="pressed" from="Windows/Menu_window/Button_container/Quit_button/NinePatchRect/Button" to="Windows/Menu_window/Button_container/Quit_button" method="_on_button_pressed"]
+[connection signal="pressed" from="Windows/Credits_window/Button/NinePatchRect/Button" to="Windows" method="_on_credits_back_button_pressed"]
+[connection signal="finished" from="AudioStreamPlayer" to="AudioStreamPlayer" method="_on_finished"]
+[connection signal="timeout" from="View_buttons" to="Windows/Menu_window/Button_container" method="_on_view_timeout"]
+
+[editable path="Windows/Tutorial_window/Button"]
+[editable path="Windows/Menu_window/Button_container/Play_button"]
+[editable path="Windows/Menu_window/Button_container/Tutorial_button"]
+[editable path="Windows/Menu_window/Button_container/Credits_button"]
+[editable path="Windows/Menu_window/Button_container/Quit_button"]
+[editable path="Windows/Credits_window/Button"]

@@ -1,0 +1,13 @@
+[gd_resource type="TileSet" load_steps=3 format=3 uid="uid://bs08xj3bvm48q"]
+
+[ext_resource type="Texture2D" uid="uid://3v73bimydvph" path="res://scene/Disco-floor1.png" id="1_jgc20"]
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_36ehp"]
+texture = ExtResource("1_jgc20")
+texture_region_size = Vector2i(400, 400)
+0:0/0 = 0
+1:0/0 = 0
+
+[resource]
+tile_size = Vector2i(400, 400)
+sources/2 = SubResource("TileSetAtlasSource_36ehp")

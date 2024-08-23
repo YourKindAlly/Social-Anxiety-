@@ -1,0 +1,8 @@
+[gd_resource type="Resource" script_class="CharacterStage" load_steps=2 format=3 uid="uid://tcw7xhh7e5ot"]
+
+[ext_resource type="Script" path="res://generic/stages/stage.gd" id="1_fcyxs"]
+
+[resource]
+script = ExtResource("1_fcyxs")
+amount_to_collect = 15
+character_color = Color(0.27451, 0.419608, 0.92549, 1)

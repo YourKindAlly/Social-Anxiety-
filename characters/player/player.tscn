@@ -1,0 +1,42 @@
+[gd_scene load_steps=8 format=3 uid="uid://cmycphda0o3or"]
+
+[ext_resource type="Script" path="res://characters/player/player.gd" id="1_usrft"]
+[ext_resource type="Resource" uid="uid://cxu8bru1pfmik" path="res://generic/stages/stage1.tres" id="2_lsggp"]
+[ext_resource type="Resource" uid="uid://dqcq4xlvgkbq3" path="res://generic/stages/stage2.tres" id="3_fd5sy"]
+[ext_resource type="Resource" uid="uid://tcw7xhh7e5ot" path="res://generic/stages/stage3.tres" id="4_l4t53"]
+[ext_resource type="SpriteFrames" uid="uid://don003v35pxw3" path="res://characters/circular_character_animation.tres" id="5_r1n0k"]
+[ext_resource type="Script" path="res://characters/player/ouch.gd" id="6_frhte"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_mninh"]
+radius = 23.0868
+
+[node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("ouch", "timer")]
+script = ExtResource("1_usrft")
+move_speed = 100.0
+stages = Array[Resource("res://generic/stages/stage.gd")]([ExtResource("2_lsggp"), ExtResource("3_fd5sy"), ExtResource("4_l4t53")])
+current_stage = ExtResource("2_lsggp")
+ouch = NodePath("Sorry")
+timer = NodePath("Sorry/Timer")
+
+[node name="Sprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(8.34465e-07, 8.34465e-07)
+scale = Vector2(0.46, 0.46)
+sprite_frames = ExtResource("5_r1n0k")
+autoplay = "default"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_mninh")
+debug_color = Color(0, 0.6, 0.701961, 0.0509804)
+
+[node name="Sorry" type="Label" parent="."]
+visible = false
+offset_left = -23.0
+offset_top = -48.0
+offset_right = 23.0
+offset_bottom = -25.0
+text = "Sorry!"
+script = ExtResource("6_frhte")
+
+[node name="Timer" type="Timer" parent="Sorry"]
+
+[connection signal="timeout" from="Sorry/Timer" to="Sorry" method="_on_timer_timeout"]

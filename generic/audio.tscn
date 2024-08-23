@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://ctj0ackd1xgxb"]
+
+[ext_resource type="AudioStream" uid="uid://dp48ixcpfk80t" path="res://menu/anxiety_music.wav" id="1_w5e4t"]
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer"]
+stream = ExtResource("1_w5e4t")
+volume_db = -10.0
+autoplay = true

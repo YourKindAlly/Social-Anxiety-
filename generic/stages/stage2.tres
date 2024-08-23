@@ -1,0 +1,8 @@
+[gd_resource type="Resource" script_class="CharacterStage" load_steps=2 format=3 uid="uid://dqcq4xlvgkbq3"]
+
+[ext_resource type="Script" path="res://generic/stages/stage.gd" id="1_pex77"]
+
+[resource]
+script = ExtResource("1_pex77")
+amount_to_collect = 9
+character_color = Color(0.873092, 0.482087, 0.31436, 1)
